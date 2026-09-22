@@ -1,62 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Research Paper Assistant helps explore scientific questions using evidence."
-    />
-    <title>Research Paper Assistant</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <nav class="navigation container" aria-label="Main navigation">
-        <a class="brand" href="#top">Research Paper Assistant</a>
-        <a class="nav-link" href="#results">My Research</a>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A personal library for organising research papers.">
+  <title>Research Paper Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Library navigation">
+      <a class="brand" href="#library">Research Paper Assistant</a>
+      <nav class="library-nav" aria-label="Library folders">
+        <p class="nav-label">Library</p>
+        <a class="folder-link active" href="#library" aria-current="page"><span class="folder-icon">&#9635;</span>All Papers <span class="folder-count">3</span></a>
+        <p class="nav-label folders-label">Folders</p>
+        <div id="folder-list" aria-live="polite"></div>
+        <p id="folder-status" class="folder-status" role="status"></p>
       </nav>
-    </header>
+      <button id="open-folder-dialog" class="new-folder-button" type="button">+ New Folder</button>
+      <p class="sidebar-note">Your private paper workspace.</p>
+    </aside>
 
-    <main id="top">
-      <section class="hero">
-        <div class="container hero-content">
-          <p class="eyebrow">Evidence-led research</p>
-          <h1>Research scientific questions with evidence.</h1>
-          <p class="hero-description">
-            Find, analyse, and compare relevant scientific papers to build a clearer
-            view of the available evidence.
-          </p>
-
-          <form id="research-form" class="research-form" novalidate>
-            <label for="research-question">Your research question</label>
-            <textarea
-              id="research-question"
-              name="researchQuestion"
-              rows="3"
-              placeholder="What are the current approaches to targeting KRAS G12D?"
-            ></textarea>
-            <p id="validation-message" class="validation-message" role="alert"></p>
-            <button type="submit" class="research-button">Research</button>
-          </form>
-        </div>
-      </section>
-
-      <section id="results" class="results-section" hidden aria-live="polite">
-        <div class="container">
-          <div class="results-heading">
-            <div>
-              <p class="eyebrow">Search results</p>
-              <h2 id="results-question"></h2>
-            </div>
-            <p id="results-count" class="results-count"></p>
-          </div>
-          <p id="results-message" class="results-message" role="status"></p>
-          <div id="paper-list" class="paper-list"></div>
+    <main id="library" class="library-main">
+      <header class="library-header"><div><p class="eyebrow">Personal research library</p><h1>My Library</h1><p class="intro">Organise, read and analyse your research papers.</p></div><button id="open-add-paper" class="add-paper-button" type="button">+ Add Paper</button></header>
+      <section class="recent-section" aria-labelledby="recent-heading">
+        <div class="section-heading"><div><h2 id="recent-heading">Recently Added</h2><p>Keep your current reading close at hand.</p></div><span class="paper-total">3 papers</span></div>
+        <div class="paper-grid">
+          <article class="paper-card"><p class="paper-type">Research article</p><h3>Targeting KRAS G12D in pancreatic cancer: emerging therapeutic opportunities</h3><p class="authors">M. Alvarez, R. Chen, and L. Patel</p><p class="citation">2024 &middot; <em>Cancer Discovery</em></p><div class="tag-list" aria-label="Tags"><span>Cancer</span><span>Biology</span><span>KRAS</span></div></article>
+          <article class="paper-card"><p class="paper-type">Review</p><h3>Single-cell analysis reveals the architecture of tumour ecosystems</h3><p class="authors">N. Okafor, J. Williams, and S. Kim</p><p class="citation">2023 &middot; <em>Nature Reviews Cancer</em></p><div class="tag-list" aria-label="Tags"><span>Cancer</span><span>Single-cell</span><span>Biology</span></div></article>
+          <article class="paper-card"><p class="paper-type">Methods paper</p><h3>Practical workflows for reproducible genomic data analysis</h3><p class="authors">A. Singh, E. Torres, and P. Laurent</p><p class="citation">2024 &middot; <em>Bioinformatics</em></p><div class="tag-list" aria-label="Tags"><span>Bioinformatics</span><span>Genomics</span><span>Methods</span></div></article>
         </div>
       </section>
     </main>
+  </div>
 
-    <script src="script.js"></script>
-  </body>
+  <div id="add-paper-modal" class="modal" hidden><div class="modal-backdrop" data-close-add-paper></div><section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="add-paper-title"><button class="close-button" type="button" aria-label="Close Add Paper dialog" data-close-add-paper>&times;</button><p class="eyebrow">Add to library</p><h2 id="add-paper-title">Add a paper</h2><p class="modal-intro">Start with the PDF when you have it. It gives your library the best source to work from.</p><section class="import-method primary-method" aria-labelledby="upload-heading"><div class="method-heading"><span class="method-number">1</span><div><h3 id="upload-heading">Upload PDF</h3><p>Recommended</p></div></div><label class="upload-zone" for="pdf-file"><span class="upload-icon">&uarr;</span><strong>Drop a research paper PDF here</strong><span>or <span class="choose-file">choose a file</span></span><input id="pdf-file" type="file" accept=".pdf,application/pdf"></label><p id="file-name" class="feedback" aria-live="polite"></p></section><div class="method-divider"><span>or</span></div><section class="import-method" aria-labelledby="link-heading"><div class="method-heading"><span class="method-number">2</span><div><h3 id="link-heading">Paste paper link</h3><p>Use a direct paper or publisher URL.</p></div></div><form id="link-form" novalidate><label class="sr-only" for="paper-url">Paper link</label><div class="url-row"><input id="paper-url" type="url" placeholder="https://example.com/research-paper"><button type="submit" class="add-link-button">Add Paper</button></div><p id="url-feedback" class="feedback" role="alert" aria-live="polite"></p></form><p class="url-note">Full text may not be available from some publisher links. You may be asked to upload the PDF instead.</p></section></section></div>
+
+  <div id="folder-dialog" class="modal" hidden><div class="modal-backdrop" data-close-folder-dialog></div><section class="small-dialog" role="dialog" aria-modal="true" aria-labelledby="folder-dialog-title"><button class="close-button" type="button" aria-label="Close new folder dialog" data-close-folder-dialog>&times;</button><h2 id="folder-dialog-title">New folder</h2><form id="folder-form" novalidate><label for="folder-name">Folder name</label><input id="folder-name" maxlength="120" autocomplete="off" placeholder="e.g. Cancer Research"><p id="folder-form-feedback" class="feedback" role="alert" aria-live="polite"></p><div class="dialog-actions"><button class="secondary-button" type="button" data-close-folder-dialog>Cancel</button><button class="add-link-button" type="submit">Create folder</button></div></form></section></div>
+
+  <div id="delete-folder-dialog" class="modal" hidden><div class="modal-backdrop" data-close-delete-dialog></div><section class="small-dialog" role="dialog" aria-modal="true" aria-labelledby="delete-folder-title"><button class="close-button" type="button" aria-label="Close delete folder dialog" data-close-delete-dialog>&times;</button><h2 id="delete-folder-title">Delete folder?</h2><p id="delete-folder-text" class="modal-intro"></p><p id="delete-folder-feedback" class="feedback" role="alert" aria-live="polite"></p><div class="dialog-actions"><button class="secondary-button" type="button" data-close-delete-dialog>Cancel</button><button id="confirm-delete-folder" class="delete-button" type="button">Delete folder</button></div></section></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
