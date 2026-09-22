@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Research Paper Assistant helps explore scientific questions using evidence."
+    />
+    <title>Research Paper Assistant</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navigation container" aria-label="Main navigation">
+        <a class="brand" href="#top">Research Paper Assistant</a>
+        <a class="nav-link" href="#results">My Research</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-content">
+          <p class="eyebrow">Evidence-led research</p>
+          <h1>Research scientific questions with evidence.</h1>
+          <p class="hero-description">
+            Find, analyse, and compare relevant scientific papers to build a clearer
+            view of the available evidence.
+          </p>
+
+          <form id="research-form" class="research-form" novalidate>
+            <label for="research-question">Your research question</label>
+            <textarea
+              id="research-question"
+              name="researchQuestion"
+              rows="3"
+              placeholder="What are the current approaches to targeting KRAS G12D?"
+            ></textarea>
+            <p id="validation-message" class="validation-message" role="alert"></p>
+            <button type="submit" class="research-button">Research</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="results" class="results-section" hidden aria-live="polite">
+        <div class="container">
+          <div class="results-heading">
+            <div>
+              <p class="eyebrow">Search results</p>
+              <h2 id="results-question"></h2>
+            </div>
+            <p id="results-count" class="results-count"></p>
+          </div>
+          <p id="results-message" class="results-message" role="status"></p>
+          <div id="paper-list" class="paper-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
